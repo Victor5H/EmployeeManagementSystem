@@ -38,7 +38,8 @@
 		</tr>
 	</table>
 
-	<a class="btn btn-info" href="updateEmp/${emp.id}">Update</a>
+	<a class="btn btn-success" href="updateEmp/${emp.id}">Update</a>
+	<a class="btn btn-danger" href="../deleteEmp/${emp.id}">Delete</a>
 
 </body>
 </html>
