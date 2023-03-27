@@ -28,7 +28,7 @@ public class AddressDAOImpl implements AddressDAO {
 
 	@Override
 	@Transactional
-	public boolean deleteAdd(int id) {
+	public boolean deleteAdd(Long id) {
 		Address address = getAdd(id);
 		if (address == null)
 			return false;
@@ -37,12 +37,6 @@ public class AddressDAOImpl implements AddressDAO {
 		session.delete(address);
 		session.getTransaction().commit();
 		return false;
-	}
-
-	@Override
-	public Address getAdd(int id) {
-		Session session = factory.openSession();
-		return session.get(Address.class, id);
 	}
 
 	@Override
@@ -56,8 +50,15 @@ public class AddressDAOImpl implements AddressDAO {
 	public void updateAdd(Address a) {
 		Session session = factory.openSession();
 		session.beginTransaction();
-		session.saveOrUpdate(a);
+		session.update(a);
 		session.getTransaction().commit();
+
+	}
+
+	@Override
+	public Address getAdd(Long id) {
+		Session session = factory.openSession();
+		return session.get(Address.class, id);
 
 	}
 

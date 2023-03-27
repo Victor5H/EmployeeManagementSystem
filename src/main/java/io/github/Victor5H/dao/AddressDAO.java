@@ -8,9 +8,9 @@ public interface AddressDAO {
 
 	boolean insertAdd(Address a);
 
-	boolean deleteAdd(int id);
+	boolean deleteAdd(Long id);
 
-	Address getAdd(int id);
+	Address getAdd(Long id);
 
 	List<Address> getAllAdd();
 

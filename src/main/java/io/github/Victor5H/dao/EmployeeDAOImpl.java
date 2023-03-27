@@ -36,7 +36,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	@Transactional
-	public boolean deleteEmp(int id) {
+	public boolean deleteEmp(Long id) {
 		Employee employee = getEmp(id);
 		if (employee == null) {
 			return false;
@@ -49,7 +49,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public Employee getEmp(int id) {
+	public Employee getEmp(Long id) {
 		Session session = factory.openSession();
 		return session.get(Employee.class, id);
 
@@ -66,7 +66,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	public void updateEmp(Employee e) {
 		Session session = factory.openSession();
 		session.beginTransaction();
-		session.saveOrUpdate(e);
+		session.update(e);
 		session.getTransaction().commit();
 
 	}

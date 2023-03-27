@@ -21,7 +21,7 @@ public class EmployeeService {
 		this.employeeDAO = employeeDAO;
 	}
 
-	public Employee getEmployee(int id) {
+	public Employee getEmployee(Long id) {
 		return employeeDAO.getEmp(id);
 	}
 
@@ -37,7 +37,7 @@ public class EmployeeService {
 		return employeeDAO.insertEmp(e);
 	}
 
-	public boolean deleteEmployee(int id) {
+	public boolean deleteEmployee(Long id) {
 		return employeeDAO.deleteEmp(id);
 	}
 }

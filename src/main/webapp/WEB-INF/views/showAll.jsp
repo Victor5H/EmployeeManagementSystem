@@ -1,21 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
 <%@ page isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>All Employees</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
 	crossorigin="anonymous">
 </head>
-<body class="container">
+<body class="p-3">
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
@@ -27,18 +25,19 @@
 				<th>Address</th>
 			</tr>
 		</thead>
-		<tr>
-			<td>${emp.id}</td>
-			<td>${emp.name}</td>
-			<td>${emp.email}</td>
-			<td>${emp.salary}</td>
-			<td>${df.format(emp.date)}</td>
-			<td>${emp.address.buildingName},${emp.address.street},
-				${emp.address.city}</td>
-		</tr>
-	</table>
+		<c:forEach items="${list}" var="item">
+			<tr>
+				<td><a href="emp/${item.id}">${item.id}</a></td>
 
-	<a class="btn btn-info" href="updateEmp/${emp.id}">Update</a>
+				<td>${item.name}</td>
+				<td>${item.email}</td>
+				<td>${item.salary}</td>
+				<td>${df.format(item.date)}</td>
+				<td>${item.address.buildingName},${item.address.street},
+					${item.address.city}</td>
+			</tr>
+		</c:forEach>
+	</table>
 
 </body>
 </html>

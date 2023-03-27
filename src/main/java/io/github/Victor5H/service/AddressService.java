@@ -20,7 +20,7 @@ public class AddressService {
 		this.dao = dao;
 	}
 
-	public Address getAddress(int id) {
+	public Address getAddress(Long id) {
 		return dao.getAdd(id);
 	}
 
@@ -32,7 +32,7 @@ public class AddressService {
 		return dao.insertAdd(a);
 	}
 
-	public boolean deleteAddress(int id) {
+	public boolean deleteAddress(Long id) {
 		return dao.deleteAdd(id);
 	}
 
