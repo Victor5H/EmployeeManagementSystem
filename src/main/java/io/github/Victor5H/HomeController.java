@@ -23,6 +23,10 @@ public class HomeController {
 	EmployeeService employeeService;
 	@Autowired
 	AddressService addressService;
+	static SimpleDateFormat sdf;
+	static {
+		sdf = new SimpleDateFormat("dd/MM/yyyy");
+	}
 
 	@RequestMapping(path = "/")
 	public String index() {
@@ -39,7 +43,7 @@ public class HomeController {
 	@RequestMapping(path = "showAll")
 	public String showAll(Model m) {
 		m.addAttribute("list", employeeService.getAllEmployees());
-		m.addAttribute("df", new SimpleDateFormat("dd/MM/yyyy"));
+		m.addAttribute("df", sdf);
 		return "showAll";
 	}
 
@@ -49,7 +53,7 @@ public class HomeController {
 		if (employee == null)
 			return "notFound";
 		m.addAttribute("emp", employee);
-		m.addAttribute("df", new SimpleDateFormat("dd/MM/yyyy"));
+		m.addAttribute("df", sdf);
 		return "empDisplay";
 	}
 
@@ -63,9 +67,11 @@ public class HomeController {
 	@RequestMapping(path = "postEmp", method = RequestMethod.POST)
 	public String empPost(@ModelAttribute Employee e, Model m) {
 		Address address = e.getAddress();
+		System.out.println(e.getDate());
 		addressService.insertAddress(address);
 		employeeService.insertEmployee(e);
 		m.addAttribute("emp", e);
+		m.addAttribute("df", sdf);
 		return "empDisplay";
 	}
 
@@ -85,7 +91,17 @@ public class HomeController {
 	@RequestMapping(path = "emp/updateEmp/{id}")
 	public String updateEmp(@PathVariable("id") String id, Model m) {
 		m.addAttribute("emp", employeeService.getEmployee(Long.parseLong(id)));
-		m.addAttribute("df", new SimpleDateFormat("dd/MM/yyyy"));
+		m.addAttribute("df", sdf);
 		return "updateEmp";
+	}
+
+	@RequestMapping(path = "deleteEmp/{id}")
+	public RedirectView deleteEmp(@PathVariable("id") Long id) {
+		Employee e = employeeService.getEmployee(id);
+		employeeService.deleteEmployee(id);
+		addressService.deleteAddress(e.getAddress().getId());
+		RedirectView rdView = new RedirectView();
+		rdView.setUrl("../showAll");
+		return rdView;
 	}
 }
